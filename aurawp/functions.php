@@ -304,10 +304,24 @@ add_filter('wp_resource_hints', 'aurawp_resource_hints', 10, 2);
 /**
  * Include additional theme files
  */
-require AURAWP_DIR . '/inc/template-tags.php';
-require AURAWP_DIR . '/inc/performance.php';
-require AURAWP_DIR . '/inc/customizer/panel.php';
-require AURAWP_DIR . '/inc/customizer/colors.php';
-require AURAWP_DIR . '/inc/customizer/animations.php';
-require AURAWP_DIR . '/inc/customizer/background.php';
-require AURAWP_DIR . '/inc/customizer/export-import.php';
+require_once AURAWP_DIR . '/inc/template-tags.php';
+require_once AURAWP_DIR . '/inc/performance.php';
+
+// Customizer files - load only in admin/customizer context
+if (is_admin()) {
+    add_action('customize_register', 'aurawp_load_customizer_files', 1);
+}
+
+/**
+ * Load customizer configuration files
+ * 
+ * @param WP_Customize_Manager $wp_customize The Customizer manager object.
+ * @return void
+ */
+function aurawp_load_customizer_files($wp_customize) {
+    require_once AURAWP_DIR . '/inc/customizer/panel.php';
+    require_once AURAWP_DIR . '/inc/customizer/colors.php';
+    require_once AURAWP_DIR . '/inc/customizer/animations.php';
+    require_once AURAWP_DIR . '/inc/customizer/background.php';
+    require_once AURAWP_DIR . '/inc/customizer/export-import.php';
+}
