@@ -304,10 +304,14 @@ add_filter('wp_resource_hints', 'aurawp_resource_hints', 10, 2);
 /**
  * Include additional theme files
  */
-require AURAWP_DIR . '/inc/template-tags.php';
-require AURAWP_DIR . '/inc/performance.php';
-require AURAWP_DIR . '/inc/customizer/panel.php';
-require AURAWP_DIR . '/inc/customizer/colors.php';
-require AURAWP_DIR . '/inc/customizer/animations.php';
-require AURAWP_DIR . '/inc/customizer/background.php';
-require AURAWP_DIR . '/inc/customizer/export-import.php';
+require_once AURAWP_DIR . '/inc/template-tags.php';
+require_once AURAWP_DIR . '/inc/performance.php';
+
+// Customizer files
+if (is_admin()) {
+    require_once AURAWP_DIR . '/inc/customizer/panel.php';
+    require_once AURAWP_DIR . '/inc/customizer/colors.php';
+    require_once AURAWP_DIR . '/inc/customizer/animations.php';
+    require_once AURAWP_DIR . '/inc/customizer/background.php';
+    require_once AURAWP_DIR . '/inc/customizer/export-import.php';
+}
