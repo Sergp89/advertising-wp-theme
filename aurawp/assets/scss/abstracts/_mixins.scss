@@ -1,0 +1,295 @@
+/**
+ * SCSS Abstracts - Mixins
+ * 
+ * Reusable mixins for the theme
+ * 
+ * @package AuraWP
+ * @since 1.0.0
+ */
+
+@import 'variables';
+
+/**
+ * Glassmorphism Effect
+ * Creates a frosted glass appearance with backdrop blur
+ * 
+ * @param {Color} $bg - Background color with transparency
+ * @param {Length} $blur - Blur amount
+ * @param {Color} $border - Border color
+ * @param {Boolean} $shadow - Include shadow
+ */
+@mixin glass-effect($bg: $glass-bg, $blur: $glass-blur, $border: $glass-border, $shadow: true) {
+    background: $bg;
+    backdrop-filter: blur($blur);
+    -webkit-backdrop-filter: blur($blur);
+    border: 1px solid $border;
+    
+    @if $shadow {
+        box-shadow: $glass-shadow;
+    }
+}
+
+/**
+ * Glow Effect
+ * Adds a glowing shadow effect
+ * 
+ * @param {Color} $color - Glow color
+ * @param {Number} $intensity - Intensity multiplier
+ * @param {Length} $spread - Spread of the glow
+ */
+@mixin glow-effect($color: $color-primary, $intensity: $glow-intensity, $spread: 20px) {
+    box-shadow: 0 0 $spread rgba($color, $intensity);
+}
+
+/**
+ * Responsive Breakpoint
+ * Media query mixin for responsive design
+ * 
+ * @param {String} $breakpoint - Breakpoint name (xs, sm, md, lg)
+ */
+@mixin breakpoint($breakpoint) {
+    @if $breakpoint == 'xs' {
+        @media (min-width: $breakpoint-xs) {
+            @content;
+        }
+    } @else if $breakpoint == 'sm' {
+        @media (min-width: $breakpoint-sm) {
+            @content;
+        }
+    } @else if $breakpoint == 'md' {
+        @media (min-width: $breakpoint-md) {
+            @content;
+        }
+    } @else if $breakpoint == 'lg' {
+        @media (min-width: $breakpoint-lg) {
+            @content;
+        }
+    }
+}
+
+/**
+ * Mobile First Breakpoint
+ * Max-width media query for mobile-first approach
+ * 
+ * @param {String} $breakpoint - Breakpoint name
+ */
+@mixin breakpoint-down($breakpoint) {
+    @if $breakpoint == 'sm' {
+        @media (max-width: #{$breakpoint-sm - 1}) {
+            @content;
+        }
+    } @else if $breakpoint == 'md' {
+        @media (max-width: #{$breakpoint-md - 1}) {
+            @content;
+        }
+    } @else if $breakpoint == 'lg' {
+        @media (max-width: #{$breakpoint-lg - 1}) {
+            @content;
+        }
+    }
+}
+
+/**
+ * Flexbox Center
+ * Centers content both horizontally and vertically
+ */
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/**
+ * Flexbox Space Between
+ * Distributes space between items
+ */
+@mixin flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/**
+ * Grid Layout
+ * Creates a responsive grid layout
+ * 
+ * @param {Number} $columns - Number of columns
+ * @param {Length} $gap - Gap between grid items
+ */
+@mixin grid-layout($columns: 3, $gap: $grid-gap) {
+    display: grid;
+    grid-template-columns: repeat($columns, 1fr);
+    gap: $gap;
+}
+
+/**
+ * Typography Scale
+ * Sets font size with responsive scaling
+ * 
+ * @param {String} $size - Font size level (xs, sm, base, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl)
+ */
+@mixin typography($size: 'base') {
+    @if $size == 'xs' {
+        font-size: $font-size-xs;
+    } @else if $size == 'sm' {
+        font-size: $font-size-sm;
+    } @else if $size == 'base' {
+        font-size: $font-size-base;
+    } @else if $size == 'lg' {
+        font-size: $font-size-lg;
+    } @else if $size == 'xl' {
+        font-size: $font-size-xl;
+    } @else if $size == '2xl' {
+        font-size: $font-size-2xl;
+    } @else if $size == '3xl' {
+        font-size: $font-size-3xl;
+    } @else if $size == '4xl' {
+        font-size: $font-size-4xl;
+    } @else if $size == '5xl' {
+        font-size: $font-size-5xl;
+    } @else if $size == '6xl' {
+        font-size: $font-size-6xl;
+    }
+}
+
+/**
+ * Transition
+ * Adds smooth transition effects
+ * 
+ * @param {String} $property - Property to transition
+ * @param {String} $speed - Transition speed (fast, base, slow, spring)
+ */
+@mixin transition($property: all, $speed: 'base') {
+    @if $speed == 'fast' {
+        transition: $property $transition-fast;
+    } @else if $speed == 'slow' {
+        transition: $property $transition-slow;
+    } @else if $speed == 'spring' {
+        transition: $property $transition-spring;
+    } @else {
+        transition: $property $transition-base;
+    }
+}
+
+/**
+ * Visually Hidden
+ * Hides element visually but keeps it accessible for screen readers
+ */
+@mixin visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/**
+ * Container
+ * Creates a centered container with max-width
+ * 
+ * @param {Length} $max-width - Maximum width
+ */
+@mixin container($max-width: $container-max) {
+    width: 100%;
+    max-width: $max-width;
+    margin: 0 auto;
+    padding: 0 $spacing-lg;
+}
+
+/**
+ * Animation Keyframes
+ * Generates keyframe animations
+ * 
+ * @param {String} $name - Animation name
+ * @param {String} $type - Animation type (fade, slide, scale, rotate)
+ */
+@mixin animation-keyframes($name, $type: 'fade') {
+    @if $type == 'fade' {
+        @keyframes #{$name} {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    } @else if $type == 'slide-up' {
+        @keyframes #{$name} {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    } @else if $type == 'slide-down' {
+        @keyframes #{$name} {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    } @else if $type == 'scale' {
+        @keyframes #{$name} {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    } @else if $type == 'rotate' {
+        @keyframes #{$name} {
+            from {
+                opacity: 0;
+                transform: rotate(-5deg);
+            }
+            to {
+                opacity: 1;
+                transform: rotate(0);
+            }
+        }
+    }
+}
+
+/**
+ * Reduced Motion
+ * Wraps styles for users who prefer reduced motion
+ */
+@mixin reduced-motion {
+    @media (prefers-reduced-motion: reduce) {
+        @content;
+    }
+}
+
+/**
+ * Dark Theme
+ * Styles specific to dark theme
+ */
+@mixin dark-theme {
+    [data-theme="dark"] & {
+        @content;
+    }
+}
+
+/**
+ * Light Theme
+ * Styles specific to light theme
+ */
+@mixin light-theme {
+    [data-theme="light"] & {
+        @content;
+    }
+}
