@@ -1,0 +1,32 @@
+/**
+ * SCSS Main - Entry Point
+ * 
+ * Imports all SCSS partials in correct order
+ * 
+ * @package AuraWP
+ * @since 1.0.0
+ */
+
+// Abstracts (variables, mixins, functions)
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
+// Base (reset, typography, utilities)
+@import 'base/reset';
+@import 'base/typography';
+
+// Components (cards, buttons, forms, etc.)
+@import 'components/glass-card';
+@import 'components/buttons';
+
+// Layout (header, footer, grid, etc.)
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/grid';
+
+// Themes (light, dark)
+@import 'themes/light';
+@import 'themes/dark';
+
+// Utilities
+@import 'base/utilities';

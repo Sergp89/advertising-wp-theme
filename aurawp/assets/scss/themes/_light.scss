@@ -1,0 +1,139 @@
+/**
+ * SCSS Themes - Light Theme
+ * 
+ * Light theme specific styles
+ * 
+ * @package AuraWP
+ * @since 1.0.0
+ */
+
+@import '../abstracts/variables';
+
+[data-theme="light"] {
+    /* Override text colors for light theme */
+    --color-text-primary: #{$neutral-900};
+    --color-text-secondary: #{$neutral-600};
+    --color-background: #{$neutral-50};
+    
+    /* Glass effect adjustments for light theme */
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-bg-hover: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(0, 0, 0, 0.08);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    
+    /* Body background */
+    body {
+        background-color: var(--color-background);
+        color: var(--color-text-primary);
+    }
+    
+    /* Header adjustments */
+    .site-header {
+        background: rgba(255, 255, 255, 0.8);
+        border-bottom: 1px solid var(--glass-border);
+    }
+    
+    /* Footer adjustments */
+    .site-footer {
+        background: rgba(255, 255, 255, 0.8);
+        border-top: 1px solid var(--glass-border);
+    }
+    
+    /* Card adjustments */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.6);
+        
+        &:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+    }
+    
+    /* Input fields */
+    input,
+    textarea,
+    select {
+        background: rgba(255, 255, 255, 0.8);
+        border-color: var(--glass-border);
+        color: var(--color-text-primary);
+        
+        &:focus {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: var(--color-primary);
+        }
+        
+        &::placeholder {
+            color: var(--neutral-400);
+        }
+    }
+    
+    /* Code blocks */
+    pre {
+        background: var(--neutral-100);
+    }
+    
+    /* Horizontal rule */
+    hr {
+        background: var(--neutral-200);
+    }
+    
+    /* Selection color */
+    ::selection {
+        background-color: var(--color-primary-light);
+        color: white;
+    }
+    
+    /* Scrollbar styling for light theme */
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: var(--neutral-100);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: var(--neutral-300);
+        border-radius: var(--radius-full);
+        
+        &:hover {
+            background: var(--neutral-400);
+        }
+    }
+}
+
+/* Light theme specific component adjustments */
+[data-theme="light"] {
+    /* Navigation */
+    .main-navigation {
+        a {
+            color: var(--neutral-700);
+            
+            &:hover {
+                color: var(--color-primary);
+            }
+        }
+    }
+    
+    /* Widget areas */
+    .widget {
+        background: rgba(255, 255, 255, 0.5);
+    }
+    
+    /* Comments */
+    .comment-list {
+        .comment {
+            background: rgba(255, 255, 255, 0.5);
+        }
+    }
+    
+    /* Post meta */
+    .entry-meta {
+        color: var(--neutral-500);
+    }
+    
+    /* Blockquote border */
+    blockquote {
+        border-left-color: var(--color-primary-light);
+    }
+}

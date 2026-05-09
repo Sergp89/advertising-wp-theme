@@ -1,0 +1,211 @@
+/**
+ * SCSS Themes - Dark Theme
+ * 
+ * Dark theme specific styles
+ * 
+ * @package AuraWP
+ * @since 1.0.0
+ */
+
+@import '../abstracts/variables';
+
+[data-theme="dark"] {
+    /* Override text colors for dark theme */
+    --color-text-primary: #{$neutral-100};
+    --color-text-secondary: #{$neutral-300};
+    --color-background: #{$neutral-950};
+    
+    /* Glass effect adjustments for dark theme */
+    --glass-bg: rgba(0, 0, 0, 0.3);
+    --glass-bg-hover: rgba(0, 0, 0, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    
+    /* Glow intensity boost for dark theme */
+    --glow-intensity: 0.7;
+    
+    /* Body background */
+    body {
+        background-color: var(--color-background);
+        color: var(--color-text-primary);
+    }
+    
+    /* Header adjustments */
+    .site-header {
+        background: rgba(0, 0, 0, 0.5);
+        border-bottom: 1px solid var(--glass-border);
+    }
+    
+    /* Footer adjustments */
+    .site-footer {
+        background: rgba(0, 0, 0, 0.5);
+        border-top: 1px solid var(--glass-border);
+    }
+    
+    /* Card adjustments */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.05);
+        
+        &:hover {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+        }
+    }
+    
+    /* Input fields */
+    input,
+    textarea,
+    select {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--glass-border);
+        color: var(--color-text-primary);
+        
+        &:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--color-primary);
+        }
+        
+        &::placeholder {
+            color: var(--neutral-500);
+        }
+    }
+    
+    /* Code blocks */
+    pre {
+        background: var(--neutral-800);
+    }
+    
+    /* Horizontal rule */
+    hr {
+        background: var(--neutral-700);
+    }
+    
+    /* Selection color */
+    ::selection {
+        background-color: var(--color-primary);
+        color: white;
+    }
+    
+    /* Scrollbar styling for dark theme */
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: var(--neutral-900);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: var(--neutral-700);
+        border-radius: var(--radius-full);
+        
+        &:hover {
+            background: var(--neutral-600);
+        }
+    }
+}
+
+/* Dark theme specific component adjustments */
+[data-theme="dark"] {
+    /* Navigation */
+    .main-navigation {
+        a {
+            color: var(--neutral-200);
+            
+            &:hover {
+                color: var(--color-primary-light);
+            }
+        }
+        
+        .current-menu-item > a {
+            color: var(--color-primary-light);
+        }
+    }
+    
+    /* Widget areas */
+    .widget {
+        background: rgba(255, 255, 255, 0.03);
+        
+        .widget-title {
+            color: var(--neutral-100);
+        }
+    }
+    
+    /* Comments */
+    .comment-list {
+        .comment {
+            background: rgba(255, 255, 255, 0.03);
+            
+            .comment-author {
+                color: var(--neutral-100);
+            }
+        }
+    }
+    
+    /* Post meta */
+    .entry-meta {
+        color: var(--neutral-400);
+    }
+    
+    /* Blockquote border */
+    blockquote {
+        border-left-color: var(--color-primary);
+        background: rgba(255, 255, 255, 0.02);
+    }
+    
+    /* Tables */
+    table {
+        background: rgba(255, 255, 255, 0.02);
+        
+        th {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--glass-border);
+        }
+        
+        td {
+            border-color: var(--glass-border);
+        }
+        
+        tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+    }
+    
+    /* Links */
+    a {
+        color: var(--color-primary-light);
+        
+        &:hover {
+            color: var(--color-primary);
+        }
+    }
+    
+    /* Buttons - outline variant */
+    .btn--outline {
+        &:hover {
+            box-shadow: 0 0 20px rgba($color-primary, 0.5);
+        }
+    }
+}
+
+/* Enhanced glow effects for dark theme */
+[data-theme="dark"] {
+    .glass-card--glow-primary:hover {
+        box-shadow: 0 0 40px rgba($color-primary, 0.4),
+                    0 12px 40px rgba(0, 0, 0, 0.5);
+    }
+    
+    .glass-card--glow-secondary:hover {
+        box-shadow: 0 0 40px rgba($color-secondary, 0.4),
+                    0 12px 40px rgba(0, 0, 0, 0.5);
+    }
+    
+    .btn--primary:hover {
+        box-shadow: 0 0 30px rgba($color-primary, 0.6);
+    }
+    
+    .btn--secondary:hover {
+        box-shadow: 0 0 30px rgba($color-secondary, 0.6);
+    }
+}

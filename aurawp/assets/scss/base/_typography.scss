@@ -1,0 +1,193 @@
+/**
+ * SCSS Base - Typography
+ * 
+ * Typography styles and heading definitions
+ * 
+ * @package AuraWP
+ * @since 1.0.0
+ */
+
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-heading);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    @include typography('5xl');
+    
+    @include breakpoint-down('md') {
+        font-size: var(--font-size-4xl);
+    }
+    
+    @include breakpoint-down('sm') {
+        font-size: var(--font-size-3xl);
+    }
+}
+
+h2 {
+    @include typography('4xl');
+    
+    @include breakpoint-down('md') {
+        font-size: var(--font-size-3xl);
+    }
+    
+    @include breakpoint-down('sm') {
+        font-size: var(--font-size-2xl);
+    }
+}
+
+h3 {
+    @include typography('3xl');
+    
+    @include breakpoint-down('md') {
+        font-size: var(--font-size-2xl);
+    }
+    
+    @include breakpoint-down('sm') {
+        font-size: var(--font-size-xl);
+    }
+}
+
+h4 {
+    @include typography('2xl');
+}
+
+h5 {
+    @include typography('xl');
+}
+
+h6 {
+    @include typography('lg');
+}
+
+/* Paragraphs */
+p {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-secondary);
+}
+
+/* Links */
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    @include transition(color, 'fast');
+    
+    &:hover {
+        color: var(--color-primary-light);
+        text-decoration: underline;
+    }
+    
+    &:focus-visible {
+        text-decoration: underline;
+    }
+}
+
+/* Lists */
+ul, ol {
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-lg);
+}
+
+li {
+    margin-bottom: var(--spacing-sm);
+    
+    > ul, > ol {
+        margin-top: var(--spacing-sm);
+        margin-bottom: 0;
+    }
+}
+
+/* Blockquote */
+blockquote {
+    border-left: 4px solid var(--color-primary);
+    padding-left: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
+    font-style: italic;
+    color: var(--color-text-secondary);
+    
+    cite {
+        display: block;
+        margin-top: var(--spacing-sm);
+        font-size: var(--font-size-sm);
+        font-style: normal;
+    }
+}
+
+/* Code */
+code, pre {
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+code {
+    background: var(--glass-bg);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--glass-border);
+}
+
+pre {
+    background: var(--neutral-800);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    overflow-x: auto;
+    margin: var(--spacing-xl) 0;
+    
+    code {
+        background: none;
+        padding: 0;
+        border: none;
+    }
+}
+
+/* Small text */
+small {
+    font-size: var(--font-size-sm);
+}
+
+/* Strong/Bold */
+strong {
+    font-weight: 600;
+}
+
+/* Horizontal Rule */
+hr {
+    border: none;
+    height: 1px;
+    background: var(--glass-border);
+    margin: var(--spacing-2xl) 0;
+}
+
+/* Text alignment utilities */
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Text transform utilities */
+.text-uppercase {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.text-lowercase {
+    text-transform: lowercase;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
+}
