@@ -255,7 +255,8 @@ add_action('admin_enqueue_scripts', 'aurawp_admin_scripts');
  * @return array Modified classes
  */
 function aurawp_no_js_class($classes) {
-    return $classes . ' no-js';
+    $classes[] = 'no-js';
+    return $classes;
 }
 add_filter('body_class', 'aurawp_no_js_class');
 
