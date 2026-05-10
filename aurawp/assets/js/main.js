@@ -137,8 +137,8 @@
             if (!this.toggleButton) return;
             
             const ariaLabel = theme === 'dark' 
-                ? aurawpSettings?.ariaSwitchToLight || 'Switch to light mode'
-                : aurawpSettings?.ariaSwitchToDark || 'Switch to dark mode';
+                ? (window.aurawpSettings && window.aurawpSettings.ariaSwitchToLight ? window.aurawpSettings.ariaSwitchToLight : 'Switch to light mode')
+                : (window.aurawpSettings && window.aurawpSettings.ariaSwitchToDark ? window.aurawpSettings.ariaSwitchToDark : 'Switch to dark mode');
             
             this.toggleButton.setAttribute('aria-label', ariaLabel);
             
