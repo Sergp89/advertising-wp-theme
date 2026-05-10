@@ -18,6 +18,18 @@ venv/
 .env
 .env.local
 .env.*
+*.so
+*.dll
+*.exe
+*.class
+*.out
+
+# Dependencies
+.venv/
+venv/
+.env
+.env.local
+*.env.*
 
 # Logs and temp files
 *.log
@@ -49,6 +61,15 @@ target/
 .pytest_cache/
 
 # Compressed files
+.coverage
+coverage/
+htmlcov/
+
+# Distribution
+dist/
+build/
+target/
+*.tar.gz
 *.zip
 *.gz
 *.tar
