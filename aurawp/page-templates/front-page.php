@@ -63,7 +63,7 @@ get_header();
                     array(
                         'icon' => 'monitor',
                         'title' => __('Web Design', 'aurawp'),
-                        'desc' => crafting('Creating stunning, user-friendly websites that convert.'),
+                        'desc' => __('Creating stunning, user-friendly websites that convert.', 'aurawp')
                     ),
                     array(
                         'icon' => 'rocket',

@@ -208,7 +208,7 @@ function aurawp_scripts() {
     wp_enqueue_script('gsap-scrolltrigger', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js', array('gsap-core'), '3.12.2', true);
 
     // Theme JavaScript files
-    wp_enqueue_script('aurawp-main', AURAWP_URI . '/assets/js/main.js', array('jquery'), AURAWP_VERSION, true);
+    wp_enqueue_script('aurawp-main', AURAWP_URI . '/assets/js/main.js', array('jquery', 'gsap-core'), AURAWP_VERSION, true);
     wp_enqueue_script('aurawp-three', AURAWP_URI . '/assets/js/three-city.js', array('three-js'), AURAWP_VERSION, true);
     wp_enqueue_script('aurawp-animations', AURAWP_URI . '/assets/js/animations.js', array('gsap-core', 'gsap-scrolltrigger'), AURAWP_VERSION, true);
 
@@ -320,6 +320,11 @@ if (is_admin()) {
  * @return void
  */
 function aurawp_load_customizer_files($wp_customize) {
+    // Only load if we're in the customizer
+    if (! ($wp_customize instanceof WP_Customize_Manager)) {
+        return;
+    }
+    
     require_once AURAWP_DIR . '/inc/customizer/panel.php';
     require_once AURAWP_DIR . '/inc/customizer/colors.php';
     require_once AURAWP_DIR . '/inc/customizer/animations.php';
