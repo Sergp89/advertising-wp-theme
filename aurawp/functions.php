@@ -331,3 +331,132 @@ function aurawp_load_customizer_files($wp_customize) {
     require_once AURAWP_DIR . '/inc/customizer/background.php';
     require_once AURAWP_DIR . '/inc/customizer/export-import.php';
 }
+
+/**
+ * ==========================================
+ * Three.js City Background Integration
+ * Mirror's Edge style 3D background
+ * @since 1.0.0
+ * ==========================================
+ */
+
+/**
+ * Enqueue Three.js city background scripts
+ */
+function aurawp_enqueue_three_bg_scripts() {
+// Check if background is disabled via customizer
+if (get_theme_mod('aurawp_three_disable_mobile', false) && wp_is_mobile()) {
+return;
+}
+
+// Enqueue Three.js from CDN with ImportMap
+wp_add_inline_script('aurawp-main', '', 'before');
+
+// Add ImportMap for Three.js modules
+$importmap = array(
+'imports' => array(
+'three'              => 'https://unpkg.com/three@0.160.0/build/three.module.js',
+'three/addons/'      => 'https://unpkg.com/three@0.160.0/examples/jsm/',
+),
+);
+
+wp_register_script('three-importmap', '', array(), null, false);
+wp_add_inline_script('three-importmap', 'window.importMap = ' . wp_json_encode($importmap), 'before');
+wp_enqueue_script('three-importmap');
+
+// Output importmap in head
+add_action('wp_head', 'aurawp_output_importmap', 1);
+
+// Build user config from customizer settings
+$user_config = array(
+'platforms'   => array(
+'enabled'       => get_theme_mod('aurawp_three_platforms_enabled', true),
+'count'         => get_theme_mod('aurawp_three_platforms_count', 50),
+'color'         => get_theme_mod('aurawp_three_platforms_color', '#ffffff'),
+'opacity'       => get_theme_mod('aurawp_three_platforms_opacity', 0.9),
+'bridgesEnabled' => get_theme_mod('aurawp_three_bridges_enabled', true),
+'bridgeColor'   => get_theme_mod('aurawp_three_bridge_color', '#ff6b00'),
+),
+'parallax'    => array(
+'enabled'     => get_theme_mod('aurawp_three_parallax_enabled', true),
+'layers'      => get_theme_mod('aurawp_three_parallax_layers', 3),
+'fogColor'    => get_theme_mod('aurawp_three_fog_color', '#1a1a2e'),
+),
+'pathMarkers' => array(
+'enabled'       => get_theme_mod('aurawp_three_path_markers_enabled', true),
+'color'         => get_theme_mod('aurawp_three_path_color', '#ff6b00'),
+'glowIntensity' => get_theme_mod('aurawp_three_glow_intensity', 1.5),
+'pulseEnabled'  => get_theme_mod('aurawp_three_pulse_enabled', true),
+),
+'general'     => array(
+'disableMobile' => get_theme_mod('aurawp_three_disable_mobile', false),
+),
+);
+
+// Enqueue main three-city module as type="module"
+wp_register_script('aurawp-three-city', AURAWP_URI . '/assets/js/three-city.js', array('aurawp-main'), AURAWP_VERSION, array(
+'in_footer'  => true,
+'strategy'   => 'defer',
+));
+
+wp_add_inline_script('aurawp-three-city', 'window.aurawpThreeUserConfig = ' . wp_json_encode($user_config) . ';', 'before');
+
+wp_enqueue_script('aurawp-three-city');
+
+// Add type="module" attribute to script tag
+add_filter('script_loader_tag', 'aurawp_add_module_type', 10, 3);
+}
+add_action('wp_enqueue_scripts', 'aurawp_enqueue_three_bg_scripts', 20);
+
+/**
+ * Output ImportMap in document head
+ */
+function aurawp_output_importmap() {
+?>
+<script type="importmap">
+{
+"imports": {
+"three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+"three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+}
+}
+</script>
+<?php
+}
+
+/**
+ * Add type="module" to ES module scripts
+ *
+ * @param string $tag    The script tag.
+ * @param string $handle The script handle.
+ * @param string $src    The script source URL.
+ * @return string Modified script tag
+ */
+function aurawp_add_module_type($tag, $handle, $src) {
+if ('aurawp-three-city' === $handle) {
+$tag = str_replace('<script ', '<script type="module" crossorigin ', $tag);
+}
+return $tag;
+}
+
+/**
+ * Output Three.js background container HTML
+ */
+function aurawp_output_three_bg_container() {
+// Check if background should be displayed
+if (get_theme_mod('aurawp_three_disable_mobile', false) && wp_is_mobile()) {
+return;
+}
+
+// Check reduced motion preference via inline script
+?>
+<div id="aurawp-three-bg" aria-hidden="true" role="presentation"></div>
+<div class="aurawp-bg-overlay" aria-hidden="true"></div>
+<?php
+}
+add_action('wp_footer', 'aurawp_output_three_bg_container', 0);
+
+/**
+ * Load Three.js customizer settings
+ */
+require_once AURAWP_DIR . '/inc/customizer/three-bg-settings.php';
